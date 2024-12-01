@@ -4,6 +4,9 @@ pub mod structs;
 // Make enum in to_do/enums.rs publicly available as a module.
 pub mod enums;
 
+// Import traits from to_do/traits/mod.rs -> as modules.
+pub mod traits;
+
 // Use TaskStatus enum + Done & Pending structs. 
 use enums::TaskStatus;
 use structs::done::Done;
