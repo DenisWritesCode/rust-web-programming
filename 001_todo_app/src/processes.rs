@@ -20,7 +20,7 @@ fn process_pending(item: Pending, command: String, state: &Map<String, Value>) {
     }
 }
 
-fn process_done(item: Pending, command: String, state: &MAp<String, Value>) {
+fn process_done(item: Done, command: String, state: &Map<String, Value>) {
     let mut state = state.clone();
 
     match command.as_str() {
