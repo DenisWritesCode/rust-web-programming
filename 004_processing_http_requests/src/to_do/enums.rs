@@ -1,3 +1,5 @@
+use serde::ser::{Serialize, Serializer, SeializeStruct};
+
 pub enum TaskStatus {
     DONE,
     PENDING
@@ -5,7 +7,6 @@ pub enum TaskStatus {
 
 
 impl TaskStatus {
-
     pub fn stringify(&self) -> String {
         match &self {
             &Self::DONE => {"DONE".to_string()},

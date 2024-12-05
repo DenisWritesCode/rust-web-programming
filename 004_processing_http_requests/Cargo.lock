@@ -928,6 +928,7 @@ name = "processing_http_requests"
 version = "0.1.0"
 dependencies = [
  "actix-web",
+ "serde",
  "serde_json",
 ]
 
