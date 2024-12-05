@@ -1,0 +1,6 @@
+[package]
+name = "processing_http_requests"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
