@@ -4,7 +4,6 @@ use serde_json::json;
 
 use crate::state::write_to_file;
 
-
 pub trait Create {
     fn create(&self, title: &String, status: &String,
               state: &mut Map<String, Value>) {
