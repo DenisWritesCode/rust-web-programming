@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-class ToDoitem extends Components {
+class ToDoitem extends Component {
     state = {
         "title": this.props.title,
         "status": this.props.status,
