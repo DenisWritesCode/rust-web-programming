@@ -26,3 +26,30 @@ function renderItems(items, processType, elementId, processFunction) {
       .addEventListener("click", processFunction);
   }
 }
+
+function apiCall(url, method) {
+  let xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      renderItems(
+        JSON.parse(this.responseText)["pending_items"],
+        "edit",
+        "pendingItems",
+        editItem
+      );
+      renderItems(
+        JSON.parse(this.responseText)["done_items"],
+        "delete",
+        "doneItems",
+        deleteItem
+      );
+    }
+  });
+
+  xhr.open(method, url);
+  xhr.setRequestHeader('content-type', 'application/json');
+  xhr.setRequestHeader('user-token', 'token');
+  return xhr
+}
