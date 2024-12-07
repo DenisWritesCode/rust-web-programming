@@ -53,3 +53,42 @@ function apiCall(url, method) {
   xhr.setRequestHeader('user-token', 'token');
   return xhr
 }
+
+function editItem() {
+    let title = this.id.replaceAll("-", " ").replace("edit ", "");
+    let call = apiCall("/v1/item/edit", "POST");
+
+    let json = {
+        "title": title,
+        "status" : "DONE"
+    };
+    call.send(JSON.stringify(json));
+}
+
+function deleteItem() {
+    let title = this.id.replaceAll("-", " ").replace("delete ", "");
+    let call = apiCall("/v1/item/delete", "POST");
+
+    let json = {
+        "title": title,
+        "status": "DONE"
+    };
+    call.send(JSON.stringify(json));
+}
+
+function getItems() {
+    let call = apiCall("/v1/item/get", 'GET');
+    call.send();
+}
+
+getItems();
+
+
+document.getElementById("create-button").addEventListener("click", createItem);
+
+function createItem() {
+    let title = document.getElementById("name");
+    let call = apiCall("/v1/item/create/" + title.value, "POST");
+    call.send();
+    document.getElementById("name").value = null;;
+}
