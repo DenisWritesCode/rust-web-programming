@@ -1,15 +1,18 @@
 use serde::Serialize;
 use std::vec::Vec;
 
-use serde_json::value::Value;
-use serde_json::Map;
-
 use actix_web::{body::BoxBody, http::header::ContentType, HttpRequest, HttpResponse, Responder};
 
-use crate::state::read_file;
 use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
 use crate::to_do::{enums::TaskStatus, to_do_factory};
+
+use crate::diesel;
+use diesel::prelude::*;
+
+use crate::database::establish_connection;
+use crate::models::item::item::Item;
+use crate::schema::to_do;
 
 #[derive(Serialize)]
 pub struct ToDoItems {
@@ -41,12 +44,17 @@ impl ToDoItems {
     }
 
     pub fn get_state() -> ToDoItems {
-        let state: Map<String, Value> = read_file("./state.json");
+        let connection = establish_connection();
         let mut array_buffer = Vec::new();
 
-        for (key, value) in state {
-            let status = TaskStatus::from_string(value.as_str().unwrap().to_string());
-            let item = to_do_factory(&key, status);
+        let items = to_do::table
+            .order(to_do::columns::id::asc())
+            .load::<Item>(&connection)
+            .unwrap();
+
+        for item in items {
+            let status = TaskStatus::new(&item.status.as_str());
+            let item = to_do_factory(&item.title, status);
             array_buffer.push(item);
         }
         return ToDoItems::new(array_buffer);
