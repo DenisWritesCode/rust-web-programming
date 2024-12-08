@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ToDoItem from './components/ToDoItem';
-import CreateToDoItem from "./components/CreateToDoItem";
+import ToDoItem from './components/ToDoItem.js';
+import CreateToDoItem from "./components/CreateToDoItem.js";
 import "./App.css";
 
 

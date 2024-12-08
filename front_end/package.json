@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "main": "public/electron.js",
+  "type": "module",
   "description": "GUI Desktop Application for a simple To Do App",
   "author": "DenisWritesCode",
   "build": {
