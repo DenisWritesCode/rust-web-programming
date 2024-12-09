@@ -7,8 +7,10 @@ use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
 use crate::to_do::{enums::TaskStatus, to_do_factory};
 
-use crate::diesel;
 use diesel::prelude::*;
+use diesel::Queryable;
+use diesel::Identifiable;
+use diesel::Insertable;
 
 use crate::database::establish_connection;
 use crate::models::item::item::Item;
