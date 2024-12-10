@@ -1,7 +1,7 @@
 use crate::schema::to_do;
 use chrono::NaiveDateTime;
 
-#[derive(Querable, Identifiable)]
+#[derive(Queryable, Identifiable)]
 #[table_name = "to_do"]
 pub struct Item {
     pub id: i32,
