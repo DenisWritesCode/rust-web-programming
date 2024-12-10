@@ -1,5 +1,5 @@
-use diesel::{prelude::*, result::Error};
-use dotenv::dotenv;
+#[macro_use] extern crate diesel;
+extern crate dotenv;
 
 use actix_cors::Cors;
 use actix_service::Service;

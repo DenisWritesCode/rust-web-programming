@@ -28,3 +28,5 @@
 - Run `docker container ls -a` and copy the *CONTAINER_ID* of your local instance.
 - Run `docker exec -it <CONTAINER_ID> psql -U username to_do` to get a shell interface to the database.
 - Run `\c` to connect to the database. And then `\d` to list the relations.
+- Run `\d+ to_do` to inspect the schema.
+- Run `SELECT * FROM __diesel_schema_migrations;` to inspect the migrations table.
