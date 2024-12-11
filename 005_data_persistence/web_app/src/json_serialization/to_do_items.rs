@@ -44,16 +44,16 @@ impl ToDoItems {
     }
 
     pub fn get_state() -> ToDoItems {
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         let mut array_buffer = Vec::new();
 
         let items = to_do::table
-            .order(to_do::columns::id::asc())
-            .load::<Item>(&connection)
+            .order(to_do::columns::id.asc())
+            .load::<Item>(&mut connection)
             .unwrap();
 
         for item in items {
-            let status = TaskStatus::new(&item.status.as_str());
+            let status = TaskStatus::from_string(item.status.as_str().to_string());
             let item = to_do_factory(&item.title, status);
             array_buffer.push(item);
         }

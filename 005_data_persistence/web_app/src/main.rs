@@ -9,9 +9,7 @@ mod database;
 mod json_serialization;
 mod jwt;
 mod models;
-mod processes;
 mod schema;
-mod state;
 mod to_do;
 mod views;
 
@@ -33,7 +31,7 @@ async fn main() -> std::io::Result<()> {
             })
             .configure(views::views_factory)
             .wrap(cors);
-        return app;
+        return app
     })
     .bind("127.0.0.1:8000")?
     .run()

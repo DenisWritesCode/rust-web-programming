@@ -10,9 +10,11 @@ use crate::jwt::JwToken;
 use crate::models::item::item::Item;
 
 pub async fn delete(to_do_item: web::Json<ToDoItem>, token: JwToken) -> HttpResponse {
-    let connection = establish_connection();
-    let items = to_do::table.filter(to_do::columns::title.eq(&to_do_item.title.as_str())).order(to_do::columns::id.asc()).load::<Item>(&connection).unwrap();
-    let _ = diesel::delete(&items[0]).execute(&connection);
+    let mut connection = establish_connection();
+    let items = to_do::table.filter(to_do::columns::title.eq(&to_do_item.title.as_str())).order(to_do::columns::id.asc()).load::<Item>(&mut connection).unwrap();
+    let _ = diesel::delete(&items[0]).execute(&mut connection);
+
+    println!("Token {} - Deleted {}", token.message, to_do_item.title);
     
     return HttpResponse::Ok().json(ToDoItems::get_state())
 }

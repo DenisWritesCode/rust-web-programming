@@ -1200,21 +1200,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "processing_http_requests"
-version = "0.1.0"
-dependencies = [
- "actix-cors",
- "actix-service",
- "actix-web",
- "chrono",
- "diesel",
- "dotenv",
- "futures",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1676,6 +1661,21 @@ name = "wasm-bindgen-shared"
 version = "0.2.99"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "943aab3fdaaa029a6e0271b35ea10b72b943135afe9bffca82384098ad0e06a6"
+
+[[package]]
+name = "web_app"
+version = "0.1.0"
+dependencies = [
+ "actix-cors",
+ "actix-service",
+ "actix-web",
+ "chrono",
+ "diesel",
+ "dotenv",
+ "futures",
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "windows-core"
