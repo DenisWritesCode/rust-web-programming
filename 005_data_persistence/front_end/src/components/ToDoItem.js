@@ -32,10 +32,15 @@ class ToDoitem extends Component {
           title: this.state.title,
           status: this.inverseStatus(this.state.status),
         },
-        { headers: { token: "some_token" } }
+        { headers: { token: localStorage.getItem("user-token") } }
       )
       .then((response) => {
         this.props.passBackResponse(response);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          this.props.logout();
+        }
       });
   };
   render() {

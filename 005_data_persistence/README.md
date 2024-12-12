@@ -1,6 +1,6 @@
 # How to run this app
 
-- Run Docker Daemon.
+- Run Docker Daemon - Desktop for me.
 - Check the folder `migrations/` and see if we have other commands there.
 - Run `diesel migration run` to run the migration locally with a running docker daemon.
 - Run `docker container ls -a` and copy the *CONTAINER_ID* of your local instance.

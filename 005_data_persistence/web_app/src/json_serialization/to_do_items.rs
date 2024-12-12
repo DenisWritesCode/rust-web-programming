@@ -10,7 +10,7 @@ use crate::to_do::{enums::TaskStatus, to_do_factory};
 use crate::diesel;
 use diesel::prelude::*;
 
-use crate::database::establish_connection;
+use crate::database::DBCONNECTION;
 use crate::models::item::item::Item;
 use crate::schema::to_do;
 
@@ -43,14 +43,14 @@ impl ToDoItems {
         };
     }
 
-    pub fn get_state() -> ToDoItems {
-        let mut connection = establish_connection();
-        let mut array_buffer = Vec::new();
-
+    pub fn get_state(user_id: i32) -> ToDoItems {
+        let mut connection = DBCONNECTION.db_connection.get().unwrap();
         let items = to_do::table
+            .filter(to_do::columns::user_id.eq(&user_id))
             .order(to_do::columns::id.asc())
             .load::<Item>(&mut connection)
             .unwrap();
+        let mut array_buffer = Vec::with_capacity(items.len());
 
         for item in items {
             let status = TaskStatus::from_string(item.status.as_str().to_string());
